@@ -82,25 +82,69 @@ while (emails != 0)
 }
 
 Console.WriteLine("\n");
-bool buttonClick = true;
 
+
+bool buttonClick = true;
+//do while loop, loop will continue when user inputs 0 for false, do while loop ends when user enters 1 for true
 do
 {
-    ButtonClick();
-} while (buttonClick = false);
-
-
-static void ButtonClick()
-{
-    Console.Write("Please enter 0 for false and 1 for true: ");
+    Console.Write("Please enter 0 for alarm and 1 to turn it off: ");
     int button = Convert.ToInt32(Console.ReadLine());
-    bool buttonClick;
     if (button == 0)
     {
+        Console.WriteLine("BRRRRRRRRRRRRRRRRRR");
         buttonClick = false;
     }
     else if (button == 1)
     {
+        Console.WriteLine("You have turned off the alarm");
         buttonClick = true;
     }
+} while (buttonClick == false);
+
+
+//static void ButtonClick()
+//{
+//    Console.Write("Please enter 0 for false and 1 for true: ");
+//    int button = Convert.ToInt32(Console.ReadLine());
+//    bool buttonClick;
+//    if (button == 0)
+//    {
+//        buttonClick = false;
+//    }
+//    else if (button == 1)
+//    {
+//        buttonClick = true;
+//    }
+//}
+
+Console.WriteLine("\n");
+
+
+//using a foreach loop to loop through an array and print them to the console indivually
+foreach (string i in names)
+{
+    Console.WriteLine(i);
 }
+
+Console.WriteLine("\n");
+
+/*
+loops and general usecases
+-----------------------------
+
+while loops are good when you know your stopping condition, 
+but not when you know how many times you want a program to loop
+or if you have a specific collection to loop through.
+
+do...while loops are only necessary if you definitely want something to run once, 
+but then stop if a condition is met.
+
+for loops are best if you want something to run a specific number of times, 
+rather than given a certain condition.
+
+
+foreach loops are the best way to loop over an array, or any other collection.
+
+ */
+
