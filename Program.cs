@@ -148,3 +148,71 @@ foreach loops are the best way to loop over an array, or any other collection.
 
  */
 
+
+//challenge
+
+
+char[] alphabet = new char[]
+{
+    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
+    'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+};
+
+string userName = UserName();
+Console.Write($"Welcome {userName} please enter a passcode: ");
+string pass = Passcode();
+Console.WriteLine($"your pass is {pass}");
+char[] charPass = pass.ToCharArray();
+char[] encryptedMessage = new char[charPass.Length];
+//creating a new char array with the input from the user for their passcode
+//create a method on plane
+static string Encrypt()
+{
+    for (int i = 0; i < charPass.Length; i++)
+    {
+        char letter = pass[i];
+        int letterPosition = Array.IndexOf(alphabet, letter);
+        int newLetterPosition = (letterPosition + 3) % 26;
+        char letterEncoded = alphabet[newLetterPosition];
+        encryptedMessage[i] = letterEncoded;
+    }
+
+    string encodedString = String.Join("", encryptedMessage);
+    Console.WriteLine($"Your encoded message is {encodedString}");
+    return letterEncoded;
+}
+
+//char[] charPass = pass.ToCharArray();
+//char[] encryptedMessage = new char[charPass.Length];
+//for (int i = 0; i < charPass.Length; i++)
+//{
+//    char letter = pass[i];
+//    int letterPosition = Array.IndexOf(alphabet, letter);
+//    int newLetterPosition = (letterPosition + 3) % 26;
+//    char letterEncoded = alphabet[newLetterPosition];
+//    encryptedMessage[i] = letterEncoded;
+//}
+
+string encodedString = String.Join("", encryptedMessage);
+Console.WriteLine($"Your encoded message is {encodedString}");
+////checking to see if .ToCharArray() worked
+//for (int i = 0; i < charPass.Length; i++)
+//{
+//    Console.WriteLine(charPass[i]);
+//}
+
+
+//method for the passcode for user
+static string Passcode()
+{
+    string passcode = Console.ReadLine();
+    return passcode.ToLower();
+}
+
+//method for to get username from user
+static string UserName() 
+{
+    Console.Write("Please enter your name: ");
+    string user = Console.ReadLine(); 
+    return user;
+}
