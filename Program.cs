@@ -152,24 +152,46 @@ foreach loops are the best way to loop over an array, or any other collection.
 //challenge
 
 
-char[] alphabet = new char[]
-{
-    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
-    'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
-};
+//char[] alphabet = new char[]
+//{
+//    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
+//    'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+//};
 
+//user greeting
 string userName = UserName();
 Console.Write($"Welcome {userName} please enter a passcode: ");
-string pass = Passcode();
-Console.WriteLine($"your pass is {pass}");
-char[] charPass = pass.ToCharArray();
-char[] encryptedMessage = new char[charPass.Length];
-//creating a new char array with the input from the user for their passcode
-//create a method on plane
+
+//store the result in a string so we can use it in the decrypt method
+string result = Encrypt();
+
+//Method will take user input as pass and encrypt the password
 static string Encrypt()
 {
+    //what we were given for the task
+    //take an array of characters and create a program that takes user input
+    //then spits out that char +3 as a password
+    //example if you input 'a' it will return 'd'
+    char[] alphabet = new char[]
+    {
+    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
+    'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+    };
+
+    //take user input place in variable pass
+    string pass = Console.ReadLine();
+    Console.WriteLine($"You entered {pass}");
+
+    //new character array made from the user input
+    char[] charPass = pass.ToCharArray();
+    //new character array set to the length of user input
+    char[] encryptedMessage = new char[charPass.Length];
+
+    //for loop to loop through the length of charPass which is
+    //an array of the characters of the users input
     for (int i = 0; i < charPass.Length; i++)
     {
+        //we take each character in pass and place it in letter 
         char letter = pass[i];
         int letterPosition = Array.IndexOf(alphabet, letter);
         int newLetterPosition = (letterPosition + 3) % 26;
@@ -178,12 +200,55 @@ static string Encrypt()
     }
 
     string encodedString = String.Join("", encryptedMessage);
-    Console.WriteLine($"Your encoded message is {encodedString}");
-    return letterEncoded;
+    Console.WriteLine($"Your password has been encoded {encodedString}");
+    return encodedString;
 }
+
+Console.WriteLine("\n");
+
+//method will decode the above method
+Decrypt(result);
+
+//method used to decrypt the password the user inputs
+static string Decrypt(string input)
+{
+    //alphabet array
+    char[] alphabet = new char[]
+   {
+    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
+    'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+   };
+
+    //new char array that will take the input and create array
+    char[] inputArray = input.ToCharArray();
+    char[] message = new char[inputArray.Length];
+    for (int i = 0; i < inputArray.Length; i++)
+    {
+        char letter = input[i];
+        int letterPosition = Array.IndexOf(alphabet, letter);
+        int newLetterPosition = (letterPosition - 3) % 26;
+        char letterEncoded = alphabet[newLetterPosition];
+        message[i] = letterEncoded;
+    }
+    string returnInput = String.Join("", message);
+    Console.WriteLine($"This should be the message decoded {returnInput}");
+
+    return input;
+
+}
+
+
+//original code before I placed it in methods
+//-------------------------------------------------------------
 
 //char[] charPass = pass.ToCharArray();
 //char[] encryptedMessage = new char[charPass.Length];
+//creating a new char array with the input from the user for their passcode
+//create a method on plane
+
+//char[] charPass = pass.ToCharArray();
+//char[] encryptedMessage = new char[charPass.Length];
+
 //for (int i = 0; i < charPass.Length; i++)
 //{
 //    char letter = pass[i];
@@ -193,21 +258,22 @@ static string Encrypt()
 //    encryptedMessage[i] = letterEncoded;
 //}
 
-string encodedString = String.Join("", encryptedMessage);
-Console.WriteLine($"Your encoded message is {encodedString}");
+//string encodedString = String.Join("", encryptedMessage);
+//Console.WriteLine($"Your encoded message is {encodedString}");
 ////checking to see if .ToCharArray() worked
 //for (int i = 0; i < charPass.Length; i++)
 //{
 //    Console.WriteLine(charPass[i]);
 //}
 
+//---------------------------------------------------------------
 
 //method for the passcode for user
-static string Passcode()
-{
-    string passcode = Console.ReadLine();
-    return passcode.ToLower();
-}
+//static string Passcode()
+//{
+//    string passcode = Console.ReadLine();
+//    return passcode.ToLower();
+//}
 
 //method for to get username from user
 static string UserName() 
